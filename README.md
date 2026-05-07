@@ -87,24 +87,32 @@ MovieBook/
 
 **Total: 28 CRUD operations**
 
-## 👥 Team Members
 
-- **Imasha Silva** - User Management
-- **Nixula Perera** - Movie Catalog
-- **Avindu Fernando** - Booking & Seats
-- **Thamalu Wickrama** - Hall Management
-- **Sanrujan Raj** - Reviews & Feedback
 
 ## 📸 Screenshots
 
 ### Homepage
-![Homepage](screenshots/homepage.png)
+<img width="1919" height="1005" alt="image" src="https://github.com/user-attachments/assets/ba54b3a6-1f4b-4c6b-b8cd-bb4bda674978" />
+
 
 ### Seat Selection
-![Seat Selection](screenshots/booking.png)
+<img width="1919" height="1002" alt="image" src="https://github.com/user-attachments/assets/1923e692-0abb-4244-86e4-87d45aca77f4" />
+
 
 ### Movie Catalog
-![Movies](screenshots/movies.png)
+<img width="1917" height="960" alt="image" src="https://github.com/user-attachments/assets/2e000b68-9294-4834-9f57-371f6bb179fd" />
+
+### Booking Details
+<img width="1919" height="1010" alt="image" src="https://github.com/user-attachments/assets/5c303c06-11e4-475f-98e2-1831a697d3cd" />
+
+###Feedback
+<img width="1901" height="980" alt="image" src="https://github.com/user-attachments/assets/ba5eda19-a0ce-4e53-8f28-f5d0e4487a1f" />
+
+###Hall Details
+<img width="1919" height="996" alt="image" src="https://github.com/user-attachments/assets/f7402b67-b5f7-46fb-b207-c4e15bd6e544" />
+<img width="1896" height="999" alt="image" src="https://github.com/user-attachments/assets/663fadb2-deb3-4438-b1d9-cd3fc598fc7d" />
+<img width="1886" height="988" alt="image" src="https://github.com/user-attachments/assets/725ee84c-8d57-4ec0-9cf7-5171da1a6940" />
+
 
 ## 🎯 Academic Requirements
 
