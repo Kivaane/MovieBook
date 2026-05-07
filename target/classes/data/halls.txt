@@ -1,0 +1,4 @@
+1,Hall A,Standard,100,10,10,20,70,10,Dolby Atmos|Air Conditioned,true
+2,Hall B,IMAX,120,12,10,30,80,10,IMAX Screen|Laser Projection|Dolby Atmos,true
+3,Hall C,3D,80,8,10,15,60,5,3D Projection|Surround Sound,true
+4,Hall D,4DX,60,6,10,10,45,5,4DX Motion|Wind|Water Effects,true

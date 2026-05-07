@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: layout(~{::section})}">
+<head>
+    <title>CineBook - Registration</title>
+</head>
+<body>
+    <section class="container my-5">
+        <div class="form-container slide-up">
+            <h2 class="text-center mb-4">JOIN CINEBOOK</h2>
+            <p class="text-center text-muted mb-5">Create an account for exclusive luxury benefits</p>
+            
+            <div th:if="${error}" class="alert alert-danger" th:text="${error}"></div>
+            <div th:if="${success}" class="alert alert-success" th:text="${success}"></div>
+            
+            <form th:action="@{/user/register}" method="post" th:object="${user}" id="registerForm" onsubmit="return validateRegistrationForm()">
+                <div class="form-group">
+                    <label class="form-label">Full Name</label>
+                    <input type="text" th:field="*{name}" class="form-control" placeholder="Enter your full name" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Email Address</label>
+                    <input type="email" th:field="*{email}" class="form-control" placeholder="Enter your email" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Phone Number</label>
+                    <input type="tel" th:field="*{phone}" class="form-control" placeholder="e.g. 0771234567" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Password</label>
+                    <input type="password" th:field="*{password}" class="form-control" placeholder="Choose a strong password" required>
+                </div>
+                <button type="submit" class="btn btn-primary w-100 mt-4">CREATE ACCOUNT</button>
+            </form>
+            
+            <div class="text-center mt-4">
+                <p>Already have an account? <a th:href="@{/user/login}">Login here</a></p>
+            </div>
+        </div>
+        
+        <script>
+            function validateRegistrationForm() {
+                const password = document.getElementById('password').value;
+                const phone = document.getElementById('phone').value;
+                const email = document.getElementById('email').value;
+                
+                // Email format basic check
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailRegex.test(email)) {
+                    alert("Please enter a valid email address.");
+                    return false;
+                }
+                
+                if (password.length < 6) {
+                    alert("Password must be at least 6 characters long.");
+                    return false;
+                }
+                
+                if (phone.length < 10) {
+                    alert("Please enter a valid phone number with at least 10 digits.");
+                    return false;
+                }
+                
+                return true;
+            }
+        </script>
+    </section>
+</body>
+</html>

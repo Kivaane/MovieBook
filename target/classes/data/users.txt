@@ -1,0 +1,8 @@
+1,Imasha Silva,imasha@email.com,cGFzczEyMw==,0771234567,customer,2024-04-20
+2,Nixula Perera,nixula@email.com,cGFzczQ1Ng==,0772345678,customer,2024-04-21
+3,Avindu Fernando,avindu@email.com,cGFzczc4OQ==,0773456789,customer,2024-04-22
+4,Thamalu Wickrama,thamalu@email.com,cGFzczEwMQ==,0774567890,customer,2024-04-23
+5,Sanrujan Raj,sanrujan@email.com,cGFzczIwMg==,0775678901,customer,2024-04-24
+6,Admin User,admin@cinema.com,YWRtaW4xMjM=,0779876543,admin,2024-04-15
+7,kivaane,kivi@gmail.com,ZGlzaGFraTc=,0774588691,customer,2026-04-29
+8,shaaroni,aukivaane7@gmail.com,RGlzaGFraTc=,0768799746,customer,2026-04-29

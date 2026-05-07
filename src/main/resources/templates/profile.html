@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: layout(~{::section})}">
+<head>
+    <title>My Profile - CineBook</title>
+</head>
+<body>
+    <section class="container my-5">
+        <div class="row">
+            <div class="col-md-8 mx-auto">
+                <div class="form-container slide-up">
+                    <div class="text-center mb-5">
+                        <div class="bg-gold d-inline-block rounded-circle p-1 mb-3">
+                            <img src="https://ui-avatars.com/api/?name=${session.userName}&background=0a0e27&color=d4af37&size=128" 
+                                 class="rounded-circle" width="100" th:alt="${user.name}">
+                        </div>
+                        <h2 class="text-gold" th:text="${user.name}">User Name</h2>
+                        <span class="badge badge-gold" th:text="${user.role}">Premium Member</span>
+                    </div>
+
+                    <div th:if="${success}" class="alert alert-success" th:text="${success}"></div>
+                    <div th:if="${error}" class="alert alert-danger" th:text="${error}"></div>
+
+                    <form th:action="@{/user/update}" method="post" th:object="${user}">
+                        <input type="hidden" th:field="*{userId}">
+                        <input type="hidden" th:field="*{role}">
+                        <input type="hidden" th:field="*{registrationDate}">
+                        
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-label">Full Name</label>
+                                    <input type="text" th:field="*{name}" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-label">Email Address</label>
+                                    <input type="email" th:field="*{email}" class="form-control" readonly>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mt-3">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-label">Phone Number</label>
+                                    <input type="tel" th:field="*{phone}" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-label">New Password (leave blank to keep current)</label>
+                                    <input type="password" th:field="*{password}" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-5 d-flex gap-3">
+                            <button type="submit" class="btn btn-primary flex-grow-1">UPDATE PROFILE</button>
+                            <a th:href="@{/user/logout}" class="btn btn-danger px-4">LOGOUT</a>
+                        </div>
+                    </form>
+                    
+                    <div class="mt-5 pt-4 border-top border-gold opacity-50 text-center">
+                        <p class="small mb-0">Member Since: <span th:text="${user.registrationDate}">2024-04-20</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

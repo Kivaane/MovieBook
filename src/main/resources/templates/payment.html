@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: layout(~{::section})}">
+<head>
+    <title>Checkout - CineBook</title>
+</head>
+<body>
+    <section class="container my-5">
+        <div class="row">
+            <div class="col-md-6 mx-auto">
+                <div class="form-container slide-up">
+                    <h2 class="text-center mb-4 text-gold">CHECKOUT</h2>
+                    <p class="text-center text-muted mb-5">Secure your premium seats</p>
+                    
+                    <div class="bg-dark p-4 rounded mb-4 border border-gold opacity-75">
+                        <h4 class="text-gold mb-3">Order Details</h4>
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>Movie:</span>
+                            <strong th:text="${booking.movieTitle}">Movie</strong>
+                        </div>
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>Seats:</span>
+                            <strong th:text="${booking.seats}">A1, A2</strong>
+                        </div>
+                        <hr>
+                        <div class="d-flex justify-content-between border-top pt-2 mt-2">
+                            <span class="fs-4">Total Amount:</span>
+                            <strong class="fs-4 text-gold">LKR <span th:text="${booking.totalPrice}">1200</span></strong>
+                        </div>
+                    </div>
+                    
+                    <form th:action="@{/payment/process}" method="post">
+                        <div class="form-group">
+                            <label class="form-label">Payment Method</label>
+                            <select name="paymentMethod" class="form-control">
+                                <option value="Credit Card">Credit Card</option>
+                                <option value="Debit Card">Debit Card</option>
+                                <option value="PayPal">PayPal</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Card Holder Name</label>
+                            <input type="text" class="form-control" placeholder="AS APPEARS ON CARD" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Card Number</label>
+                            <input type="text" name="cardLastFour" class="form-control" placeholder="XXXX XXXX XXXX XXXX" required>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label class="form-label">Expiry Date</label>
+                                    <input type="text" class="form-control" placeholder="MM/YY" required>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label class="form-label">CVV</label>
+                                    <input type="password" class="form-control" placeholder="***" required>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary w-100 mt-4 py-3 fs-5">
+                            COMPLETE PAYMENT
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

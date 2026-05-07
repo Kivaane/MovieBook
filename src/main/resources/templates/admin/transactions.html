@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: layout(~{::section})}">
+<head>
+    <title>Manage Transactions - CineBook</title>
+</head>
+<body>
+    <section class="container my-5">
+        <h1 class="text-gold mb-4">TRANSACTION HISTORY</h1>
+
+        <div class="glass-card p-0 overflow-hidden border-gold">
+            <div class="table-responsive">
+                <table class="table table-dark table-hover mb-0">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Booking ID</th>
+                            <th>User ID</th>
+                            <th>Amount</th>
+                            <th>Method</th>
+                            <th>Date</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="payment : ${payments}">
+                            <td th:text="${payment.transactionId}">1</td>
+                            <td th:text="${payment.bookingId}">1</td>
+                            <td th:text="${payment.userId}">1</td>
+                            <td th:text="'LKR ' + ${payment.amount}">LKR 1200</td>
+                            <td th:text="${payment.paymentMethod}">Credit Card</td>
+                            <td th:text="${payment.transactionDate}">2024-04-26</td>
+                            <td>
+                                <span class="badge bg-success" th:text="${payment.status}">Completed</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

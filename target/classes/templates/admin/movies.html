@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: layout(~{::section})}">
+<head>
+    <title>Manage Movies - CineBook</title>
+</head>
+<body>
+    <section class="container my-5">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h1 class="text-gold">MANAGE MOVIES</h1>
+            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addMovieModal">
+                ADD NEW MOVIE
+            </button>
+        </div>
+
+        <div th:if="${success}" class="alert alert-success" th:text="${success}"></div>
+
+        <div class="glass-card p-0 overflow-hidden border-gold">
+            <div class="table-responsive">
+                <table class="table table-dark table-hover mb-0">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Title</th>
+                            <th>Genre</th>
+                            <th>Price</th>
+                            <th>Rating</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="movie : ${movies}">
+                            <td th:text="${movie.movieId}">1</td>
+                            <td th:text="${movie.title}">Inception</td>
+                            <td th:text="${movie.genre}">Sci-Fi</td>
+                            <td th:text="'LKR ' + ${movie.price}">LKR 1200</td>
+                            <td th:text="${movie.rating} + '/10'">8.8/10</td>
+                            <td>
+                                <button class="btn btn-sm btn-info me-2" 
+                                        th:attr="onclick='editMovie(\'' + ${movie.movieId} + '\', \'' + ${movie.title} + '\', \'' + ${movie.genre} + '\', \'' + ${movie.price} + '\')'">
+                                    EDIT
+                                </button>
+                                <a th:href="@{'/admin/movies/delete/' + ${movie.movieId}}" 
+                                   class="btn btn-sm btn-danger" 
+                                   onclick="return confirm('Are you sure?')">DELETE</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Add Movie Modal -->
+        <div class="modal fade" id="addMovieModal" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content bg-dark text-white border-gold">
+                    <div class="modal-header border-gold">
+                        <h5 class="modal-title text-gold">ADD NEW MOVIE</h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                    </div>
+                    <form th:action="@{/admin/movies/add}" method="post">
+                        <div class="modal-body">
+                            <div class="mb-3">
+                                <label class="form-label">Title</label>
+                                <input type="text" name="title" class="form-control" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Genre</label>
+                                <input type="text" name="genre" class="form-control" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Description</label>
+                                <textarea name="description" class="form-control" rows="3"></textarea>
+                            </div>
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="mb-3">
+                                        <label class="form-label">Price (LKR)</label>
+                                        <input type="number" name="price" class="form-control" required>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="mb-3">
+                                        <label class="form-label">Rating</label>
+                                        <input type="text" name="rating" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Image URL</label>
+                                <input type="text" name="imageUrl" class="form-control">
+                            </div>
+                        </div>
+                        <div class="modal-footer border-gold">
+                            <button type="submit" class="btn btn-primary">SAVE MOVIE</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            function editMovie(id, title, genre, price) {
+                // For simplicity, just alert or implement another modal
+                // In a real app, populate an edit modal
+            }
+        </script>
+    </section>
+</body>
+</html>

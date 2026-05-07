@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: layout(~{::section})}">
+<head>
+    <title>Book Tickets - CineBook</title>
+</head>
+<body>
+    <section class="container my-5">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="seat-grid-container">
+                    <h2 class="text-center mb-5" th:text="${movie.title} + ' - Seat Selection'">Seat Selection</h2>
+                    
+                    <div class="screen"></div>
+                    <div class="screen-label">SCREEN THIS WAY</div>
+                    
+                    <div class="seat-grid">
+                        <!-- Generate Grid 10x10 -->
+                        <div th:each="row : ${#numbers.sequence(0, 9)}" th:with="rowLetter=${'ABCDEFGHIJ'.substring(row, row+1)}" class="d-contents">
+                            <div th:each="col : ${#numbers.sequence(1, 10)}" 
+                                 th:with="seatNum=${rowLetter + col}"
+                                 th:id="'seat-' + ${seatNum}"
+                                 class="seat available"
+                                 th:attr="onclick='toggleSeat(\'' + ${seatNum} + '\')'"
+                                 th:text="${seatNum}">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="seat-legend">
+                        <div class="legend-item">
+                            <div class="legend-box available"></div>
+                            <span>Available</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-box selected"></div>
+                            <span>Selected</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-box booked"></div>
+                            <span>Booked</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-4">
+                <div class="booking-summary slide-up">
+                    <h3 class="mb-4 text-gold border-bottom pb-3">Booking Summary</h3>
+                    
+                    <div class="summary-row">
+                        <span class="summary-label">Movie</span>
+                        <span class="summary-value" th:text="${movie.title}">Movie Title</span>
+                    </div>
+                    
+                    <div class="summary-row">
+                        <span class="summary-label">Hall</span>
+                        <div class="dropdown" th:if="${selectedHall == null}">
+                            <button class="btn btn-outline btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                                Select Hall
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-dark">
+                                <li th:each="hall : ${halls}">
+                                    <a class="dropdown-item" th:href="@{'/bookings/book/' + ${movie.movieId}(hallId=${hall.hallId}, showtime=${selectedShowtime})}" th:text="${hall.hallName} + ' (' + ${hall.hallType} + ')' ">Hall A</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <span class="summary-value" th:if="${selectedHall != null}" th:text="${selectedHall.hallName}">Hall A</span>
+                    </div>
+                    
+                    <div class="summary-row">
+                        <span class="summary-label">Showtime</span>
+                        <span class="summary-value" th:text="${selectedShowtime}">10:00 AM</span>
+                    </div>
+                    
+                    <div class="selected-seats-container mt-4">
+                        <span class="summary-label d-block mb-2">Selected Seats</span>
+                        <div id="selectedSeatsDisplay" class="selected-seats-list">
+                            <span class="text-muted">No seats selected</span>
+                        </div>
+                    </div>
+                    
+                    <div class="total-price-container mt-5">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span class="summary-label">Price per seat</span>
+                            <span class="text-white" th:text="'LKR ' + ${movie.price}">LKR 1200</span>
+                        </div>
+                        <div class="total-price mt-3">
+                            LKR <span id="totalPrice">0.00</span>
+                        </div>
+                    </div>
+                    
+                    <form id="bookingForm" th:action="@{/bookings/confirm}" method="post">
+                        <input type="hidden" id="movieId" name="movieId" th:value="${movie.movieId}">
+                        <input type="hidden" id="moviePrice" th:value="${movie.price}">
+                        <input type="hidden" id="hallId" name="hallId" th:value="${selectedHall != null ? selectedHall.hallId : ''}">
+                        <input type="hidden" id="showtime" name="showtime" th:value="${selectedShowtime}">
+                        <input type="hidden" id="selectedSeatsInput" name="seats">
+                        <input type="hidden" id="totalPriceInput" name="totalPrice">
+                        
+                        <button type="button" onclick="proceedToPayment()" class="btn btn-primary w-100 mt-4" 
+                                th:disabled="${selectedHall == null}">
+                            PROCEED TO PAYMENT
+                        </button>
+                    </form>
+                    
+                    <div th:if="${selectedHall == null}" class="alert alert-info mt-3 p-2 small">
+                        Please select a hall to continue.
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Hidden Script Data -->
+        <script th:src="@{/js/seatSelection.js}"></script>
+    </section>
+</body>
+</html>
